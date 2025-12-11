@@ -49,6 +49,8 @@ echo '<script>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#education">Education</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#skills">Skills</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#interests">Interests</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#projects">Projects</a></li>
+
                 </ul>
             </div>
         </nav>
@@ -191,9 +193,35 @@ echo '<script>
                         <p class="mb-0">
                         Outside of work, I enjoy outdoor activities that keep me active and inspired, such as hiking, biking, and other adventure pursuits. I also enjoy experimenting in the kitchen as an aspiring chef and following sci-fi and fantasy movies and series that spark creativity and curiosity.
                         </p>
-
             </section>
             <hr class="m-0" />
+            <!-- Projects-->
+            <section class="resume-section" id="projects">
+                <div class="resume-section-content">
+                    <h2 class="mb-5">Projects</h2>
+                    <ul class="fa-ul mb-0">
+                        <li>
+                            <span class="fa-li"><i class="fas fa-folder text-warning"></i></span>
+                            Order Management System - Developed a full-stack web application for managing customer orders, inventory, and shipping using React, Node.js, and MongoDB.
+                        </li>
+                        <li>
+                            <span class="fa-li"><i class="fas fa-folder text-warning"></i></span>
+                            Fiverr Clone - Created a marketplace platform similar to Fiverr, allowing users to buy and sell services with integrated payment processing using Stripe API.
+                        </li>
+                        <li>
+                            <span class="fa-li"><i class="fas fa-folder text-warning"></i></span>
+                            
+                            Attendance System - Designed and implemented an attendance tracking system for schools using PHP and MySQL, featuring user authentication and reporting capabilities.
+                        </li>
+                        <li>
+                            <span class="fa-li"><i class="fas fa-folder text-warning"></i></span>
+                            
+                            Takoyaki Web Application - Built a web application for a local takoyaki business to manage orders and showcase their menu, utilizing HTML, CSS, and JavaScript.
+                        </li>
+                      
+                    </ul>
+                </div>
+            </section>
         </div>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -348,7 +376,27 @@ function loadDynamicContent() {
             contentDiv.innerHTML = educationHTML;
         }
     }
-    
+    // Load Projects
+const projectsData = JSON.parse(localStorage.getItem('resumeProjects'));
+if (projectsData && projectsData.length > 0) {
+    const projectsSection = document.getElementById('projects');
+    if (projectsSection) {
+        const contentDiv = projectsSection.querySelector('.resume-section-content');
+        let projectsHTML = '<h2 class="mb-5">Projects</h2><ul class="fa-ul mb-0">';
+        
+        projectsData.forEach((proj) => {
+            projectsHTML += `
+                <li>
+                    <span class="fa-li"><i class="fas fa-folder text-warning"></i></span>
+                    <strong>${proj.title}</strong> - ${proj.technologies ? `(${proj.technologies}) ` : ''}${proj.description}
+                </li>
+            `;
+        });
+        
+        projectsHTML += '</ul>';
+        contentDiv.innerHTML = projectsHTML;
+    }
+}
     // Load Skills
     const skillsData = JSON.parse(localStorage.getItem('resumeSkills'));
     if (skillsData) {
@@ -381,5 +429,6 @@ function loadDynamicContent() {
 }
 </script>
 <!-- END DYNAMIC SCRIPT -->
+ 
     </body>
 </html>
